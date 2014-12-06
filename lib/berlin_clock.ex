@@ -15,14 +15,25 @@ defmodule BerlinClock do
 
   def berlin_5_hour({h, _m, _s}) do
     on_count = round(Float.floor(h / 5))
-    b_5_on(on_count)
+    b_5h_on(on_count)
   end
 
-  def b_5_on(0), do: "...."
-  def b_5_on(1), do: "*..."
-  def b_5_on(2), do: "**.."
-  def b_5_on(3), do: "***."
-  def b_5_on(4), do: "****"
+  def b_5h_on(0), do: "...."
+  def b_5h_on(1), do: "*..."
+  def b_5h_on(2), do: "**.."
+  def b_5h_on(3), do: "***."
+  def b_5h_on(4), do: "****"
+
+  def berlin_1_hour({h, _m, _s}) do
+    on_count = rem(h, 5)
+    b_1h_on(on_count)
+  end
+
+  def b_1h_on(0), do: "...."
+  def b_1h_on(1), do: "*..."
+  def b_1h_on(2), do: "**.."
+  def b_1h_on(3), do: "***."
+  def b_1h_on(4), do: "****"
 
 
 
