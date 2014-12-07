@@ -26,12 +26,18 @@ defmodule BerlinClockTest do
     assert ("****" == BerlinClock.berlin_5_hour({21,0,0}))
   end
 
+
   test "line 3. 1 hour dots" do
     assert ("...." == BerlinClock.berlin_1_hour({0,0,0}))
     assert ("*..." == BerlinClock.berlin_1_hour({1,0,0}))
     assert ("**.." == BerlinClock.berlin_1_hour({2,0,0}))
     assert ("***." == BerlinClock.berlin_1_hour({3,0,0}))
     assert ("****" == BerlinClock.berlin_1_hour({4,0,0}))
+  end
+
+  test "line 4. 5 minute dots" do
+    assert ("..........." == BerlinClock.berlin_5_minutes({0, 3, 0}))
+    assert ("*.........." == BerlinClock.berlin_5_minutes({0, 8, 0}))
   end
 
   #  test "00:00:00" do

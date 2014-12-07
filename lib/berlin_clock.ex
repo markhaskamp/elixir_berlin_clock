@@ -7,34 +7,48 @@ defmodule BerlinClock do
 #  l5: 4 columns,  1 minute per
 
   # {h, m, s} = :erlang.time 
-  def parse_time(s) do
-  end
 
-  def berlin_second({_h, _m, s}) when (rem(s,2) == 0), do: "*"
-  def berlin_second(_), do: "."
+  def berlin_second({_h, _m, s}) do
+    if (rem(s, 2) == 0) do
+      "*"
+    else
+      "."
+    end
+  end
 
   def berlin_5_hour({h, _m, _s}) do
-    on_count = round(Float.floor(h / 5))
-    b_5h_on(on_count)
+    foo(4, h)
   end
-
-  def b_5h_on(0), do: "...."
-  def b_5h_on(1), do: "*..."
-  def b_5h_on(2), do: "**.."
-  def b_5h_on(3), do: "***."
-  def b_5h_on(4), do: "****"
 
   def berlin_1_hour({h, _m, _s}) do
-    on_count = rem(h, 5)
-    b_1h_on(on_count)
+    b_1_h(h)
   end
 
-  def b_1h_on(0), do: "...."
-  def b_1h_on(1), do: "*..."
-  def b_1h_on(2), do: "**.."
-  def b_1h_on(3), do: "***."
-  def b_1h_on(4), do: "****"
+  defp b_1_h(0), do: "...."
+  defp b_1_h(1), do: "*..."
+  defp b_1_h(2), do: "**.."
+  defp b_1_h(3), do: "***."
+  defp b_1_h(4), do: "****"
 
+  def berlin_5_minutes({_h, m, _s}) do
+    foo(11, m)
+  end
 
+  def foo(lights, h) do
+      1..lights 
+      |> Enum.map(fn(n) -> 
+          if(h >= (n*5)) do
+            '*'
+          else
+            '.'          
+          end
+         end)
+
+      |> Enum.reduce(fn(c, acc) -> acc ++ c end)
+      |> to_string
+  end
 
 end
+
+
+
