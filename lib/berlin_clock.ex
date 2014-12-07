@@ -20,7 +20,7 @@ defmodule BerlinClock do
   def berlin_second(t), do: "."
 
   def berlin_5_hour({h, _m, _s}) do
-    foo(4, h)
+    turn_on_lights(4, h)
   end
 
   def berlin_1_hour({h, _m, _s}) do
@@ -28,7 +28,7 @@ defmodule BerlinClock do
   end
 
   def berlin_5_minute({_h, m, _s}) do
-    foo(11, m)
+    turn_on_lights(11, m)
   end
 
   def berlin_1_minute({_h, m, _s}) do
@@ -41,7 +41,7 @@ defmodule BerlinClock do
   defp b_1_h(3), do: "***."
   defp b_1_h(4), do: "****"
 
-  def foo(lights, h) do
+  def turn_on_lights(lights, h) do
       1..lights 
       |> Enum.map(fn(n) -> 
           if(h >= (n*5)) do
