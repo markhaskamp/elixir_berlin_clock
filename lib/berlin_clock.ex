@@ -17,7 +17,7 @@ defmodule BerlinClock do
   end
 
   def berlin_second({_h, _m, s}) when (rem(s,2) == 0), do: "*"
-  def berlin_second({_h, _m, _s}), do: "."
+  def berlin_second(t), do: "."
 
   def berlin_5_hour({h, _m, _s}) do
     foo(4, h)
