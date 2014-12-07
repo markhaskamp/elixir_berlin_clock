@@ -36,16 +36,22 @@ defmodule BerlinClockTest do
   end
 
   test "line 4. 5 minute dots" do
-    assert ("..........." == BerlinClock.berlin_5_minutes({0, 3, 0}))
-    assert ("*.........." == BerlinClock.berlin_5_minutes({0, 8, 0}))
+    assert ("..........." == BerlinClock.berlin_5_minute({0, 3, 0}))
+    assert ("*.........." == BerlinClock.berlin_5_minute({0, 8, 0}))
   end
 
-  #  test "00:00:00" do
-  #    assert ["*", "....", "....", "...........", "...."] == BerlinClock.parse_time("00:00:00")
-  #  end
+  test "00:00:00" do
+    assert ["*", "....", "....", "...........", "...."] == BerlinClock.parse_time({0, 0, 0})
+  end
+
+  test "13:17:01" do
+    assert [".", "**..", "***.", "***........", "**.."] == BerlinClock.parse_time({13, 17, 01})
+  end
+
+  test "23:59:59" do
+    assert [".", "****", "***.", "***********", "****"] == BerlinClock.parse_time({23, 59, 59})
+  end
+
 end
 
 
-#  (is (= '("*" "...." "...." "..........." "....") (berlin-clock (parse-time "00:00:00"))))
-# (is (= '("." "**.." "***." "***........" "**..") (berlin-clock (parse-time "13:17:01"))))
-# (is (= '("." "****" "***." "***********" "****") (berlin-clock (parse-time "23:59:59"))))) 

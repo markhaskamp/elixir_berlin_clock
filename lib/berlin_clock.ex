@@ -8,20 +8,31 @@ defmodule BerlinClock do
 
   # {h, m, s} = :erlang.time 
 
-  def berlin_second({_h, _m, s}) do
-    if (rem(s, 2) == 0) do
-      "*"
-    else
-      "."
-    end
+  def parse_time(t) do
+    [berlin_second(t),
+     berlin_5_hour(t),
+     berlin_1_hour(t),
+     berlin_5_minute(t),
+     berlin_1_minute(t)]
   end
+
+  def berlin_second({_h, _m, s}) when (rem(s,2) == 0), do: "*"
+  def berlin_second({_h, _m, _s}), do: "."
 
   def berlin_5_hour({h, _m, _s}) do
     foo(4, h)
   end
 
   def berlin_1_hour({h, _m, _s}) do
-    b_1_h(h)
+    b_1_h(rem(h,5))
+  end
+
+  def berlin_5_minute({_h, m, _s}) do
+    foo(11, m)
+  end
+
+  def berlin_1_minute({_h, m, _s}) do
+    b_1_h(rem(m, 5))
   end
 
   defp b_1_h(0), do: "...."
@@ -29,10 +40,6 @@ defmodule BerlinClock do
   defp b_1_h(2), do: "**.."
   defp b_1_h(3), do: "***."
   defp b_1_h(4), do: "****"
-
-  def berlin_5_minutes({_h, m, _s}) do
-    foo(11, m)
-  end
 
   def foo(lights, h) do
       1..lights 
@@ -49,6 +56,4 @@ defmodule BerlinClock do
   end
 
 end
-
-
 
