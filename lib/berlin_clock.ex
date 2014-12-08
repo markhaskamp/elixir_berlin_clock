@@ -43,8 +43,8 @@ defmodule BerlinClock do
 
   def build_light_row(lights, h) do
       1..lights 
-      |> Enum.map(fn(n) -> 
-          if(turn_on_light?(h, n)) do
+      |> Enum.map(fn(light) -> 
+          if(turn_on_light?(h, light)) do
             '*'
           else
             '.'          
