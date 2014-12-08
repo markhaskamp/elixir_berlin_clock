@@ -55,8 +55,8 @@ defmodule BerlinClock do
       |> to_string
   end
 
-  defp turn_on_light?(hour, val) do
-    hour >= (val * 5)
+  defp turn_on_light?(cur_time_unit, light) do
+    cur_time_unit >= (light * 5)
   end
 
 
